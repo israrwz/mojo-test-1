@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
+
 import { StyleSheet, Image, Pressable } from "react-native";
 
 import { Text, View } from "../components/Themed";
@@ -6,8 +8,18 @@ import { RootTabScreenProps } from "../types";
 import useColorScheme from "../hooks/useColorScheme";
 import Colors from "../constants/Colors";
 
+import { useSelector, useDispatch } from "react-redux";
+import { ApplicationState, onLoadPoll } from "../redux";
+
 export default function TodayScreen({ navigation }: RootTabScreenProps<"Today">) {
   const colorScheme = useColorScheme();
+  const dispatch = useDispatch();
+
+  const { poll, error } = useSelector((state: ApplicationState) => state.pollReducer);
+
+  useEffect(() => {
+    dispatch(onLoadPoll());
+  }, [poll]);
 
   return (
     <View style={styles.container}>
@@ -28,20 +40,22 @@ export default function TodayScreen({ navigation }: RootTabScreenProps<"Today">)
           <MessageBox label="Read  10 min" description="How porn affects your confidence" />
           <MessageBox label="Listen  9 min" description="Create positive views of your erections" />
         </View>
-        <Pressable
-          onPress={() => navigation.navigate("Modal")}
-          style={({ pressed }) => ({
-            opacity: pressed ? 0.5 : 1,
-          })}
-        >
-          <View style={styles.notification}>
-            <View style={{ flexDirection: "row", backgroundColor: "transparent" }}>
-              <Text style={{ color: "#fff", fontFamily: "sofia", lineHeight: 20, marginRight: 8 }}>Mojo's daily poll 📆</Text>
-              <Text style={{ color: "#fff", fontFamily: "sofia", lineHeight: 20, textDecorationLine: "underline" }}>Open</Text>
+        {poll.id && (
+          <Pressable
+            onPress={() => navigation.navigate("Modal")}
+            style={({ pressed }) => ({
+              opacity: pressed ? 0.5 : 1,
+            })}
+          >
+            <View style={styles.notification}>
+              <View style={{ flexDirection: "row", backgroundColor: "transparent" }}>
+                <Text style={{ color: "#fff", fontFamily: "sofia", lineHeight: 20, marginRight: 8 }}>Mojo's daily poll 📆</Text>
+                <Text style={{ color: "#fff", fontFamily: "sofia", lineHeight: 20, textDecorationLine: "underline" }}>Open</Text>
+              </View>
+              <Image source={require("../assets/images/close_white.png")} style={{ width: 18, height: 18 }} />
             </View>
-            <Image source={require("../assets/images/close_white.png")} style={{ width: 18, height: 18 }} />
-          </View>
-        </Pressable>
+          </Pressable>
+        )}
       </View>
     </View>
   );
