@@ -27,12 +27,12 @@ const linking: LinkingOptions<RootStackParamList> = {
           },
           Favourites: {
             screens: {
-              ExploreScreen: 'favourites',
+              FavouritesScreen: 'favourites',
             },
           },
           Connect: {
             screens: {
-              ExploreScreen: 'connect',
+              ConnectScreen: 'connect',
             },
           },
         },

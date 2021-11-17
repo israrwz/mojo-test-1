@@ -19,7 +19,7 @@ export default function TodayScreen({ navigation }: RootTabScreenProps<"Today">)
 
   useEffect(() => {
     dispatch(onLoadPoll());
-  }, [poll]);
+  });
 
   return (
     <View style={styles.container}>
@@ -42,7 +42,7 @@ export default function TodayScreen({ navigation }: RootTabScreenProps<"Today">)
         </View>
         {poll.id && (
           <Pressable
-            onPress={() => navigation.navigate("Modal")}
+            onPress={() => navigation.navigate("Modal", poll)}
             style={({ pressed }) => ({
               opacity: pressed ? 0.5 : 1,
             })}
@@ -56,6 +56,7 @@ export default function TodayScreen({ navigation }: RootTabScreenProps<"Today">)
             </View>
           </Pressable>
         )}
+        {/* <Text>{JSON.stringify(poll)}</Text> */}
       </View>
     </View>
   );

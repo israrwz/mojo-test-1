@@ -17,7 +17,7 @@ import NotFoundScreen from "../screens/NotFoundScreen";
 import TodayScreen from "../screens/TodayScreen";
 import ExploreScreen from "../screens/ExploreScreen";
 import FavouritesScreen from "../screens/FavouritesScreen";
-import ConnectScreen from "../screens/TodayScreen";
+import ConnectScreen from "../screens/ConnectScreen";
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 
@@ -41,7 +41,7 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: "Oops!" }} />
       <Stack.Group screenOptions={{ presentation: "modal", headerTitle: "x" }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="Modal" component={ModalScreen} options={{ headerShown: false }} />
       </Stack.Group>
     </Stack.Navigator>
   );
