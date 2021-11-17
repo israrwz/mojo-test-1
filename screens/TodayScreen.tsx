@@ -1,7 +1,6 @@
 import * as React from "react";
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet, Image, Pressable } from "react-native";
 
-import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 import useColorScheme from "../hooks/useColorScheme";
@@ -29,13 +28,20 @@ export default function TodayScreen({ navigation }: RootTabScreenProps<"Today">)
           <MessageBox label="Read  10 min" description="How porn affects your confidence" />
           <MessageBox label="Listen  9 min" description="Create positive views of your erections" />
         </View>
-        <View style={styles.notification}>
-          <View style={{ flexDirection: "row", backgroundColor: "transparent" }}>
-            <Text style={{ color: "#fff" }}>Mojo's daily poll 📆</Text>
-            <Text style={{ color: "#fff", textDecorationLine: "underline" }}>Open</Text>
+        <Pressable
+          onPress={() => navigation.navigate("Modal")}
+          style={({ pressed }) => ({
+            opacity: pressed ? 0.5 : 1,
+          })}
+        >
+          <View style={styles.notification}>
+            <View style={{ flexDirection: "row", backgroundColor: "transparent" }}>
+              <Text style={{ color: "#fff", fontFamily: "sofia", lineHeight: 20, marginRight: 8 }}>Mojo's daily poll 📆</Text>
+              <Text style={{ color: "#fff", fontFamily: "sofia", lineHeight: 20, textDecorationLine: "underline" }}>Open</Text>
+            </View>
+            <Image source={require("../assets/images/close_white.png")} style={{ width: 18, height: 18 }} />
           </View>
-          <Image source={require("../assets/images/close_white.png")} style={{ width: 18, height: 18 }} />
-        </View>
+        </Pressable>
       </View>
     </View>
   );
@@ -57,6 +63,7 @@ function MessageBox({ label, description }: Message) {
 
 const styles = StyleSheet.create({
   container: {
+    fontFamily: "sofia",
     flex: 1,
   },
   bodyContainer: {
@@ -68,8 +75,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   title: {
+    fontFamily: "sofia-bold",
     fontSize: 24,
-    fontWeight: "700",
     marginBottom: 16,
   },
   messageBox: {
@@ -79,12 +86,14 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   label: {
+    fontFamily: "sofia",
     fontSize: 14,
     color: "#101725",
     marginBottom: 5,
   },
   description: {
     fontSize: 16,
+    fontFamily: "sofia",
     color: "#101725",
   },
   notification: {
@@ -102,10 +111,12 @@ const styles = StyleSheet.create({
   },
   smallWhite: {
     fontSize: 16,
+    fontFamily: "sofia",
     color: "#fff",
   },
   bigHeading: {
     fontSize: 30,
+    fontFamily: "sofia-bold",
     lineHeight: 52,
     fontWeight: "700",
     color: "#fff",
