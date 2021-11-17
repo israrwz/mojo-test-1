@@ -25,6 +25,16 @@ const linking: LinkingOptions<RootStackParamList> = {
               ExploreScreen: 'explore',
             },
           },
+          Favourites: {
+            screens: {
+              ExploreScreen: 'favourites',
+            },
+          },
+          Connect: {
+            screens: {
+              ExploreScreen: 'connect',
+            },
+          },
         },
       },
       Modal: 'modal',

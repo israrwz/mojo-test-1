@@ -23,9 +23,34 @@ export default function TodayScreen({ navigation }: RootTabScreenProps<"Today">)
         </View>
         <Text style={{ ...styles.smallWhite, fontSize: 14 }}>1 / 7 days completed</Text>
       </View>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TodayScreen.tsx" />
+      <View style={styles.bodyContainer}>
+        <View>
+          <Text style={styles.title}>Day 1</Text>
+          <MessageBox label="Read  10 min" description="How porn affects your confidence" />
+          <MessageBox label="Listen  9 min" description="Create positive views of your erections" />
+        </View>
+        <View style={styles.notification}>
+          <View style={{ flexDirection: "row", backgroundColor: "transparent" }}>
+            <Text style={{ color: "#fff" }}>Mojo's daily poll 📆</Text>
+            <Text style={{ color: "#fff", textDecorationLine: "underline" }}>Open</Text>
+          </View>
+          <Image source={require("../assets/images/close_white.png")} style={{ width: 18, height: 18 }} />
+        </View>
+      </View>
+    </View>
+  );
+}
+
+type Message = {
+  label: string;
+  description: string;
+};
+
+function MessageBox({ label, description }: Message) {
+  return (
+    <View style={styles.messageBox}>
+      <Text style={styles.label}>{label}</Text>
+      <Text style={styles.description}>{description}</Text>
     </View>
   );
 }
@@ -34,14 +59,41 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
+  bodyContainer: {
+    marginLeft: 16,
+    marginRight: 16,
+    marginTop: 32,
+    marginBottom: 12,
+    flexGrow: 1,
+    justifyContent: "space-between",
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+  title: {
+    fontSize: 24,
+    fontWeight: "700",
+    marginBottom: 16,
+  },
+  messageBox: {
+    marginBottom: 12,
+    backgroundColor: "#EFF3FE",
+    borderRadius: 20,
+    padding: 16,
+  },
+  label: {
+    fontSize: 14,
+    color: "#101725",
+    marginBottom: 5,
+  },
+  description: {
+    fontSize: 16,
+    color: "#101725",
+  },
+  notification: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: "#5033FF",
+    borderRadius: 12,
+    color: "#fff",
+    padding: 16,
   },
   goalContainer: {
     height: 158,
